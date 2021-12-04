@@ -22,11 +22,13 @@ def articles(request):
     if request.method == 'GET':
         category_name = request.query_params['category']
         dash = request.query_params['dash']
+        #this part is very similiar and works for some reason
         if dash == "True":
             if request.user.is_authenticated:
                 articles = Article.objects.filter(author=request.user)
             else:
                 return HttpResponse(status=401)
+        # *end part*
         elif category_name:
             try:
                 category = Category.objects.get(name__icontains=category_name)
